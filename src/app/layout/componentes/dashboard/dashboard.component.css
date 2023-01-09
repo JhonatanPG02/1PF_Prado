@@ -1,0 +1,15 @@
+.row {
+  display: flex;
+  flex-direction: row;
+}
+
+.navbar {
+  width: 15%;
+  height: 100vh;
+  display: flex;
+  align-items: flex-start;
+}
+
+.container {
+  width: 85%;
+}

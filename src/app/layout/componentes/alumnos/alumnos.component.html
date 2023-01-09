@@ -1,0 +1,51 @@
+<div class="container">
+  <h1 class="text-primary" appTitle>LISTA DE ALUMNOS</h1>
+  <table mat-table [dataSource]="students" >
+    <ng-container matColumnDef="documentNumber">
+      <th mat-header-cell *matHeaderCellDef class="bg-secondary text-light"> Documento </th>
+      <td mat-cell *matCellDef="let element"> {{element.documentNumber}} </td>
+    </ng-container>
+
+    <ng-container matColumnDef="name">
+      <th mat-header-cell *matHeaderCellDef class="bg-secondary text-light"> Nombres y Apellidos </th>
+      <td mat-cell *matCellDef="let element"> {{element.name | alumno: element.lastname}} </td>
+    </ng-container>
+
+    <ng-container matColumnDef="course">
+        <th mat-header-cell *matHeaderCellDef class="bg-secondary text-light"> Curso </th>
+        <td mat-cell *matCellDef="let element"> {{element.course}} </td>
+    </ng-container>
+
+    <ng-container matColumnDef="turn">
+        <th mat-header-cell *matHeaderCellDef class="bg-secondary text-light"> Turno </th>
+        <td mat-cell *matCellDef="let element"> {{element.turn}} </td>
+    </ng-container>
+
+    <ng-container matColumnDef="email">
+      <th mat-header-cell *matHeaderCellDef class="bg-secondary text-light"> Email </th>
+      <td mat-cell *matCellDef="let element"> {{element.email}} </td>
+  </ng-container>
+
+    <ng-container matColumnDef="delete">
+        <th mat-header-cell *matHeaderCellDef class="bg-secondary text-light"> Eliminar </th>
+        <td mat-cell *matCellDef="let element">
+            <button mat-icon-button color="warn" aria-label="delete" (click)="eliminarAlumno(element)">
+                <mat-icon>delete</mat-icon>
+            </button>
+        </td>
+    </ng-container>
+
+    <ng-container matColumnDef="edit">
+      <th mat-header-cell *matHeaderCellDef class="bg-secondary text-light"> Editar </th>
+      <td mat-cell *matCellDef="let element">
+          <button mat-icon-button color="warn" aria-label="edit" (click)="editarAlumno(element)">
+              <mat-icon>edit</mat-icon>
+          </button>
+      </td>
+  </ng-container>
+
+
+    <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
+    <tr mat-row *matRowDef="let row; columns: displayedColumns;"></tr>
+  </table>
+</div>
