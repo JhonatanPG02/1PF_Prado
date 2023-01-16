@@ -5,6 +5,7 @@ import { FormularioComponent } from './componentes/formulario/formulario.compone
 import { DashboardComponent } from './componentes/dashboard/dashboard.component';
 import { AboutUsComponent } from './componentes/about-us/about-us.component';
 import { LaborExchangeComponent } from './componentes/labor-exchange/labor-exchange.component';
+import { LoginGuardService } from '../auth/services/login-guard.service';
 
 
 const routes: Routes = [
@@ -15,6 +16,7 @@ const routes: Routes = [
   {
     path: 'dashboard',
     component: DashboardComponent,
+    canActivate: [LoginGuardService],
     children: [
       {path: '', component: FormularioComponent},
 

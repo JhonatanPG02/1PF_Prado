@@ -3,7 +3,7 @@ import { Component, ElementRef, OnInit, TemplateRef, ViewChild, ViewContainerRef
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { Alumnos } from '../../shared/models/alumnos.model';
 import { StudentsService } from '../../shared/servicios/students.service';
-import { Subscription } from 'rxjs';
+import { Observable, Subscription } from 'rxjs';
 
 @Component({
   selector: 'app-formulario',
@@ -13,8 +13,12 @@ import { Subscription } from 'rxjs';
 export class FormularioComponent implements OnInit {
 
   public formAlumnos: FormGroup
-  public dataStudents$: Subscription
-  public students: Alumnos[] = []
+  public formEdit: FormGroup
+  public students: Observable<any>
+  public title: string = ''
+
+  displayedColumns = ['documentNumber', 'name', 'course', 'turn', 'email', 'delete', 'edit']
+
 
   @ViewChild('agregarAlumno', {static: true, read: TemplateRef})
   agregarAlumno: TemplateRef<ElementRef>
@@ -25,12 +29,11 @@ export class FormularioComponent implements OnInit {
     private studentsService: StudentsService,
     private router: Router
   ) {
-    this.dataStudents$ = this.studentsService.getStudents().subscribe(
-      (response: any) => this.students = response
-    )
+    this.students = this.studentsService.students$
   }
 
   ngOnInit(): void {
+
     this.formAlumnos = this.fb.group({
       documentNumber: [
         '',
@@ -58,7 +61,6 @@ export class FormularioComponent implements OnInit {
       turn: ['', Validators.required],
       email: ['', [Validators.required, Validators.email]]
     })
-
   }
 
 
@@ -126,7 +128,22 @@ export class FormularioComponent implements OnInit {
     }
   }
 
+
   openModal(): void {
+    this.title = 'NUEVO ALUMNO'
+    this.viewContainerRef.createEmbeddedView(this.agregarAlumno)
+  }
+
+  openModalEdit(elem: any): void {
+    this.title = 'EDITAR ALUMNO'
+    this.formAlumnos.controls['documentNumber'].setValue(elem.documentNumber)
+    this.formAlumnos.controls['name'].setValue(elem.name)
+    this.formAlumnos.controls['lastname'].setValue(elem.lastname)
+    this.formAlumnos.controls['course'].setValue(elem.course)
+    this.formAlumnos.controls['turn'].setValue(elem.turn)
+    this.formAlumnos.controls['email'].setValue(elem.email)
+    console.log(this.formAlumnos.value)
+
     this.viewContainerRef.createEmbeddedView(this.agregarAlumno)
   }
 
@@ -135,14 +152,35 @@ export class FormularioComponent implements OnInit {
     this.formAlumnos.reset()
   }
 
-  onSubmit(): void {
-    this.students = [...this.students, this.formAlumnos.value]
+  addStudent(): void {
+
+    const data = {
+      id: +this.formAlumnos.controls['documentNumber'].value,
+      ...this.formAlumnos.value
+    }
+
+    this.studentsService.addStudents(data)
+    this.viewContainerRef.clear()
+    this.formAlumnos.reset()
+  }
+
+  deleteStudent(alumno: Alumnos): void {
+    this.studentsService.deleteStudent(alumno)
+  }
+
+  editStudent(): void {
+    const data = {
+      id: +this.formAlumnos.controls['documentNumber'].value,
+      ...this.formAlumnos.value
+    }
+    this.studentsService.editStudent(data)
+    console.log(this.students)
     this.viewContainerRef.clear()
     this.formAlumnos.reset()
   }
 
   backToHome(): void {
-    this.router.navigate(['/'])
+    this.router.navigate(['/home'])
   }
 
 }

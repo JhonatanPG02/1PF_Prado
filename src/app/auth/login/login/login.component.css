@@ -1,0 +1,17 @@
+
+
+main {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  height: 80%;
+}
+
+.register {
+  cursor: pointer;
+
+}
+
+.register:hover {
+  color: rgb(172, 39, 198)
+}

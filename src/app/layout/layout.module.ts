@@ -7,7 +7,6 @@ import { FormularioComponent } from './componentes/formulario/formulario.compone
 import { ReactiveFormsModule } from '@angular/forms';
 import { AlumnoPipe } from './shared/pipes/alumno.pipe';
 import { TitleDirective } from './shared/directivas/title.directive';
-import { AlumnosComponent } from './componentes/alumnos/alumnos.component';
 import { NavbarComponent } from './componentes/navbar/navbar.component';
 import { MaterialModule } from './shared/modulos/material/material.module';
 import { HttpClientModule } from '@angular/common/http';
@@ -20,7 +19,6 @@ import { LaborExchangeComponent } from './componentes/labor-exchange/labor-excha
   declarations: [
     LandingComponent,
     FormularioComponent,
-    AlumnosComponent,
     NavbarComponent,
     AlumnoPipe,
     TitleDirective,
@@ -34,6 +32,9 @@ import { LaborExchangeComponent } from './componentes/labor-exchange/labor-excha
     ReactiveFormsModule,
     MaterialModule,
     HttpClientModule
+  ],
+  exports: [
+    MaterialModule
   ],
   providers: [],
 })

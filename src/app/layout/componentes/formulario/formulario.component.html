@@ -8,7 +8,57 @@
   <button mat-raised-button color="primary" (click)="openModal()">AGREGAR ALUMNO</button>
 </div>
 
-<app-alumnos [students]="students"></app-alumnos>
+<div class="container">
+  <h1 class="text-primary" appTitle>LISTA DE ALUMNOS</h1>
+  <table mat-table [dataSource]="students" >
+    <ng-container matColumnDef="documentNumber">
+      <th mat-header-cell *matHeaderCellDef class="bg-secondary text-light"> Documento </th>
+      <td mat-cell *matCellDef="let element"> {{element.documentNumber}} </td>
+    </ng-container>
+
+    <ng-container matColumnDef="name">
+      <th mat-header-cell *matHeaderCellDef class="bg-secondary text-light"> Nombres y Apellidos </th>
+      <td mat-cell *matCellDef="let element"> {{element.name | alumno: element.lastname}} </td>
+    </ng-container>
+
+    <ng-container matColumnDef="course">
+        <th mat-header-cell *matHeaderCellDef class="bg-secondary text-light"> Curso </th>
+        <td mat-cell *matCellDef="let element"> {{element.course}} </td>
+    </ng-container>
+
+    <ng-container matColumnDef="turn">
+        <th mat-header-cell *matHeaderCellDef class="bg-secondary text-light"> Turno </th>
+        <td mat-cell *matCellDef="let element"> {{element.turn}} </td>
+    </ng-container>
+
+    <ng-container matColumnDef="email">
+      <th mat-header-cell *matHeaderCellDef class="bg-secondary text-light"> Email </th>
+      <td mat-cell *matCellDef="let element"> {{element.email}} </td>
+  </ng-container>
+
+    <ng-container matColumnDef="delete">
+        <th mat-header-cell *matHeaderCellDef class="bg-secondary text-light"> Eliminar </th>
+        <td mat-cell *matCellDef="let element">
+            <button mat-icon-button color="warn" aria-label="delete" (click)="deleteStudent(element)">
+                <mat-icon>delete</mat-icon>
+            </button>
+        </td>
+    </ng-container>
+
+    <ng-container matColumnDef="edit">
+      <th mat-header-cell *matHeaderCellDef class="bg-secondary text-light"> Editar </th>
+      <td mat-cell *matCellDef="let element">
+          <button mat-icon-button color="warn" aria-label="edit" (click)="openModalEdit(element)">
+              <mat-icon>edit</mat-icon>
+          </button>
+      </td>
+  </ng-container>
+
+
+    <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
+    <tr mat-row *matRowDef="let row; columns: displayedColumns;"></tr>
+  </table>
+</div>
 
 <ng-template #agregarAlumno>
   <div class="modal-background">
@@ -17,12 +67,12 @@
       <button mat-raised-button color="primary" (click)="hideModal()"><mat-icon matSuffix>close</mat-icon></button>
     </div>
     <div class="modal-card-body">
-      <h2 class="text-primary" appTitle>NUEVO ALUMNO</h2>
-      <form [formGroup]="formAlumnos" (ngSubmit)="onSubmit()">
+      <h2 class="text-primary" appTitle>{{title}}</h2>
+      <form [formGroup]="formAlumnos" (ngSubmit)="this.title == 'NUEVO ALUMNO' ? addStudent() : editStudent()">
         <div class="form">
           <mat-form-field appearance="fill">
             <mat-label>Documento</mat-label>
-            <input matInput formControlName="documentNumber" placeholder="Ingresa tu Nº de documento">
+            <input matInput formControlName="documentNumber" placeholder="Ingresa tu Nº de documento" >
             <mat-icon matSuffix>3p</mat-icon>
             <mat-error *ngIf="this.formAlumnos.controls['documentNumber'].invalid">{{getErrorDocument()}}</mat-error>
           </mat-form-field>
@@ -66,7 +116,7 @@
             <mat-icon matSuffix>mail</mat-icon>
             <mat-error *ngIf="this.formAlumnos.controls['email'].invalid">{{getErrorEmail()}}</mat-error>
           </mat-form-field>
-          <button mat-flat-button color="primary" type="submit" [disabled]="formAlumnos.invalid">Registrar</button>
+          <button mat-flat-button color="primary" type="submit" [disabled]="formAlumnos.invalid">Guardar</button>
         </div>
       </form>
     </div>

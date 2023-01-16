@@ -1,0 +1,12 @@
+main {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  height: 70%;
+}
+
+.button-back {
+  display: flex;
+  justify-content: end;
+  margin: 2rem;
+}

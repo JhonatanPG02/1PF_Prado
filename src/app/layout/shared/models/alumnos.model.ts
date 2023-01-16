@@ -1,12 +1,14 @@
 export class Alumnos {
-    documentNumber:string=''
+    id: number = 0;
+    documentNumber: string='';
     name:string ='';
     lastname:string ='';
     course:string='';
     turn:string='';
     email:string=''
 
-  constructor(documentNumber:string, name:string, lastname:string, course:string, turn: string, email: string){
+  constructor(id:number, documentNumber:string, name:string, lastname:string, course:string, turn: string, email: string){
+      this.id= id,
       this.documentNumber=documentNumber,
       this.name=name,
       this.lastname=lastname,

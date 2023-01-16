@@ -16,6 +16,6 @@ export class LandingComponent implements OnInit {
   }
 
   nextPage(): void {
-    this.router.navigate(['dashboard'])
+    this.router.navigate(['/home/dashboard'])
   }
 }

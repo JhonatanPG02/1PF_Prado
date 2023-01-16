@@ -8,7 +8,10 @@ import { AppRoutingModule } from './app.routing.module';
 import { FooterComponent } from './main/footer/footer.component';
 import { LayoutModule } from './layout/layout.module';
 import { MaterialModule } from './layout/shared/modulos/material/material.module';
-
+import { AngularFireModule} from '@angular/fire/compat'
+import { environment } from 'src/environments/environment';
+import { AuthModule } from './auth/auth.module';
+import { CookieService} from 'ngx-cookie-service'
 
 @NgModule({
   declarations: [
@@ -22,11 +25,13 @@ import { MaterialModule } from './layout/shared/modulos/material/material.module
     ReactiveFormsModule,
     AppRoutingModule,
     MaterialModule,
-    LayoutModule
+    LayoutModule,
+    AuthModule,
+    AngularFireModule.initializeApp(environment.firebaseConfig)
   ],
   exports: [
   ],
-  providers: [],
+  providers: [ CookieService],
   bootstrap: [AppComponent]
 })
 export class AppModule { }

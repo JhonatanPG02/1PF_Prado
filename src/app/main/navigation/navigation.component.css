@@ -3,3 +3,8 @@ img {
   height: 40px;
   margin-right: 1rem;
 }
+
+mat-toolbar {
+  display: flex;
+  justify-content: space-between;
+}
