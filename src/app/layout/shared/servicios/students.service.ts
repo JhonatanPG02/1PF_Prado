@@ -1,8 +1,10 @@
 import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
+import { Store } from '@ngrx/store';
 import { BehaviorSubject } from 'rxjs';
 import { Observable } from 'rxjs/internal/Observable';
 import { map } from 'rxjs/operators';
+import { dataStudents } from 'src/app/store/app.action';
 
 
 @Injectable({
@@ -11,13 +13,18 @@ import { map } from 'rxjs/operators';
 export class StudentsService {
 private url = 'http://demo3045564.mockable.io/students';
 public students$: Observable<any>;
-  private students = new BehaviorSubject<any>([]);
+private students = new BehaviorSubject<any>([]);
+
 constructor(
-  private http: HttpClient
+  private http: HttpClient,
+  private store: Store,
 ) {
   this.students$ = this.students.asObservable();
     this.getStudents().subscribe(res => {
       this.students.next(res);
+      this.store.dispatch(dataStudents(
+        {students: res}
+      ))
     });
 }
 

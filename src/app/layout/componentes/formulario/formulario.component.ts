@@ -3,7 +3,11 @@ import { Component, ElementRef, OnInit, TemplateRef, ViewChild, ViewContainerRef
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { Alumnos } from '../../shared/models/alumnos.model';
 import { StudentsService } from '../../shared/servicios/students.service';
-import { Observable, Subscription } from 'rxjs';
+import { Observable } from 'rxjs';
+import { Store } from '@ngrx/store';
+import { selectListStudents } from 'src/app/store/app.selector';
+import { AppState } from '../../../store/app.state';
+
 
 @Component({
   selector: 'app-formulario',
@@ -27,12 +31,15 @@ export class FormularioComponent implements OnInit {
     private fb: FormBuilder,
     private viewContainerRef: ViewContainerRef,
     private studentsService: StudentsService,
-    private router: Router
+    private router: Router,
+    private store: Store<AppState>,
   ) {
     this.students = this.studentsService.students$
   }
 
   ngOnInit(): void {
+
+    this.students = this.store.select(selectListStudents)
 
     this.formAlumnos = this.fb.group({
       documentNumber: [
