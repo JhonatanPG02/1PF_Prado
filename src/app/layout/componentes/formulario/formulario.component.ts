@@ -34,7 +34,7 @@ export class FormularioComponent implements OnInit {
     private router: Router,
     private store: Store<AppState>,
   ) {
-    this.students = this.studentsService.students$
+    //this.students = this.studentsService.students$
   }
 
   ngOnInit(): void {

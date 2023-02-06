@@ -4,7 +4,8 @@ import { Store } from '@ngrx/store';
 import { BehaviorSubject } from 'rxjs';
 import { Observable } from 'rxjs/internal/Observable';
 import { map } from 'rxjs/operators';
-import { dataStudents } from 'src/app/store/app.action';
+import { addStudent, dataStudents, deleteStudent } from 'src/app/store/app.action';
+import { Alumnos } from '../models/alumnos.model';
 
 
 @Injectable({
@@ -19,12 +20,13 @@ constructor(
   private http: HttpClient,
   private store: Store,
 ) {
-  this.students$ = this.students.asObservable();
-    this.getStudents().subscribe(res => {
-      this.students.next(res);
+  //this.students$ = this.students.asObservable();
+  this.getStudents().subscribe(res => {
+      //this.students.next(res);
       this.store.dispatch(dataStudents(
         {students: res}
       ))
+      console.log(this.store)
     });
 }
 
@@ -33,14 +35,16 @@ constructor(
   }
 
   addStudents(payload: any) {
-    let newStudent = this.students.getValue()
-    newStudent.push(payload)
-    this.students.next(newStudent)
+    // let newStudent = this.students.getValue()
+    // newStudent.push(payload)
+    // this.students.next(newStudent)
+    this.store.dispatch(addStudent({alumno: payload}))
   }
 
-  deleteStudent(data: any) {
-    let newData = this.students.getValue().filter((elem: any) => elem.id != data.id)
-    this.students.next(newData)
+  deleteStudent(data: Alumnos) {
+    // let newData = this.students.getValue().filter((elem: any) => elem.id != data.id)
+    // this.students.next(newData)
+    this.store.dispatch(deleteStudent({alumno: data}))
   }
 
   editStudent(data: any) {
