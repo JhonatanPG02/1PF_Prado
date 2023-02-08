@@ -13,6 +13,7 @@ import { HttpClientModule } from '@angular/common/http';
 import { DashboardComponent } from './componentes/dashboard/dashboard.component';
 import { AboutUsComponent } from './componentes/about-us/about-us.component';
 import { LaborExchangeComponent } from './componentes/labor-exchange/labor-exchange.component';
+import { CoursesComponent } from './componentes/courses/courses.component';
 
 
 @NgModule({
@@ -24,7 +25,8 @@ import { LaborExchangeComponent } from './componentes/labor-exchange/labor-excha
     TitleDirective,
     DashboardComponent,
     AboutUsComponent,
-    LaborExchangeComponent
+    LaborExchangeComponent,
+    CoursesComponent
   ],
   imports: [
     CommonModule,

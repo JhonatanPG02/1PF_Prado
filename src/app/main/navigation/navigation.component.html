@@ -3,7 +3,12 @@
     <img src="../../../assets/images/logo.png" alt="img-logo">
     <span class="text-light">TEC VIRTUAL</span>
   </div>
-  <div class="button-login">
-    <button mat-flat-button color="primary" *ngIf="!logged" routerLink="/auth/login">Login</button>
+  <div>
+    <div class="button-login">
+      <button mat-flat-button color="primary" *ngIf="!logged" (click)="login()">Login</button>
+    </div>
+    <div class="button-login">
+      <button mat-flat-button color="primary" *ngIf="logged" (click)="logout()">Logout</button>
+    </div>
   </div>
 </mat-toolbar>

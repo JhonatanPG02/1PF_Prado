@@ -2,11 +2,12 @@ import { Router } from '@angular/router';
 import { Component, ElementRef, OnInit, TemplateRef, ViewChild, ViewContainerRef } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { Alumnos } from '../../shared/models/alumnos.model';
-import { StudentsService } from '../../shared/servicios/students.service';
 import { Observable } from 'rxjs';
 import { Store } from '@ngrx/store';
 import { selectListStudents } from 'src/app/store/app.selector';
 import { AppState } from '../../../store/app.state';
+import { addStudent, deleteStudent, editStudent } from 'src/app/store/app.action';
+import { StudentsService } from '../../shared/servicios/students.service';
 
 
 @Component({
@@ -30,16 +31,18 @@ export class FormularioComponent implements OnInit {
   constructor(
     private fb: FormBuilder,
     private viewContainerRef: ViewContainerRef,
-    private studentsService: StudentsService,
     private router: Router,
     private store: Store<AppState>,
+    private studenService: StudentsService
   ) {
-    //this.students = this.studentsService.students$
+    this.studenService.getStudents()
   }
 
   ngOnInit(): void {
 
     this.students = this.store.select(selectListStudents)
+
+    console.log(this.students)
 
     this.formAlumnos = this.fb.group({
       documentNumber: [
@@ -166,13 +169,13 @@ export class FormularioComponent implements OnInit {
       ...this.formAlumnos.value
     }
 
-    this.studentsService.addStudents(data)
+    this.store.dispatch(addStudent({alumno: data}))
     this.viewContainerRef.clear()
     this.formAlumnos.reset()
   }
 
   deleteStudent(alumno: Alumnos): void {
-    this.studentsService.deleteStudent(alumno)
+    this.store.dispatch(deleteStudent({alumno}))
   }
 
   editStudent(): void {
@@ -180,8 +183,7 @@ export class FormularioComponent implements OnInit {
       id: +this.formAlumnos.controls['documentNumber'].value,
       ...this.formAlumnos.value
     }
-    this.studentsService.editStudent(data)
-    console.log(this.students)
+    this.store.dispatch(editStudent({alumno: data}))
     this.viewContainerRef.clear()
     this.formAlumnos.reset()
   }

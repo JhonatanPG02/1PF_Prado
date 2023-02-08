@@ -5,6 +5,7 @@ import firebase from 'firebase/compat/app'
 import 'firebase/compat/auth'
 import { CookieService } from 'ngx-cookie-service';
 
+
 @Injectable({
   providedIn: 'root'
 })
@@ -44,7 +45,15 @@ getIdToken() {
 }
 
 isLogged() {
-  return this.cookiesService.get("token")
+   return this.cookiesService.get("token")
+}
+
+logout() {
+  firebase.auth().signOut().then(()=> {
+    this.token = "";
+    this.cookiesService.set("token", this.token);
+    this.router.navigate(['/home']);
+  });
 }
 
 }

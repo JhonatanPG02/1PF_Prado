@@ -6,6 +6,7 @@ import { DashboardComponent } from './componentes/dashboard/dashboard.component'
 import { AboutUsComponent } from './componentes/about-us/about-us.component';
 import { LaborExchangeComponent } from './componentes/labor-exchange/labor-exchange.component';
 import { LoginGuardService } from '../auth/services/login-guard.service';
+import { CoursesComponent } from './componentes/courses/courses.component';
 
 
 const routes: Routes = [
@@ -23,6 +24,10 @@ const routes: Routes = [
       {
         path: 'about-us',
       component: AboutUsComponent
+      },
+      {
+        path: 'courses',
+      component: CoursesComponent
       },
       {
         path: 'labor-exchange',

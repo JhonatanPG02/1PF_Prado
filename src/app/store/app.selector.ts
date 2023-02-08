@@ -2,6 +2,7 @@ import {createSelector} from '@ngrx/store'
 import { AppState } from './app.state';
 
 
+
 export const selectStudentsFeature = (state: AppState) => state.students;
 
 export const selectListStudents = createSelector(
@@ -9,3 +10,7 @@ export const selectListStudents = createSelector(
   (state: any ) => state.students
 )
 
+export const selectListCourses = createSelector(
+  selectStudentsFeature,
+  (state: any) => state.courses
+)

@@ -1,12 +1,12 @@
 import { Alumnos } from '../layout/shared/models/alumnos.model';
-import { addStudent, dataStudents, deleteStudent } from './app.action';
+import { addStudent, dataCourses, dataStudents, deleteStudent, editStudent } from './app.action';
 import {createReducer, on} from '@ngrx/store'
 
 export const initialState: {
   students: any,
-  error: any
+  courses: any,
 } = {students: [],
-    error: null}
+    courses: []}
 
 export const studentsReducer = createReducer(
   initialState,
@@ -18,5 +18,11 @@ export const studentsReducer = createReducer(
   }),
   on(deleteStudent, (state, {alumno}) => {
     return {...state, students: state.students.filter((value: Alumnos) => value != alumno)}
-  })
+  }),
+  on(editStudent, (state, {alumno}) => {
+    return {...state, students: state.students.map((value: Alumnos) => value.id == alumno.id ? alumno : value)}
+  }),
+  on(dataCourses, (state, {courses}) => {
+    return {...state, courses}
+  }),
 )

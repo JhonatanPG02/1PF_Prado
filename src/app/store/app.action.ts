@@ -15,3 +15,13 @@ export const deleteStudent = createAction(
   '[Delete Student] Delete student success',
   props<{alumno: Alumnos}>()
 )
+
+export const editStudent = createAction(
+  '[Edit Student] Edit student success',
+  props<{alumno: Alumnos}>()
+)
+
+export const dataCourses = createAction(
+  '[Data Courses] Loaded success',
+  props<{courses: any}>()
+)
