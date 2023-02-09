@@ -1,3 +1,25 @@
-<p>
-  courses works!
-</p>
+
+<div class="container">
+  <h1 class="text-primary" appTitle>CURSOS</h1>
+</div>
+
+<div *ngFor="let data of courses" >
+  <div class="cards">
+    <mat-card >
+      <mat-card-header>
+        <div mat-card-avatar class="example-header-image"></div>
+        <mat-card-title>{{data.course}}</mat-card-title>
+        <mat-card-subtitle>Tutor: {{data.tutor}}</mat-card-subtitle>
+      </mat-card-header>
+      <div class="container-card">
+
+        <mat-card-content>
+          <p>
+            {{data.desc}}
+          </p>
+        </mat-card-content>
+        <img mat-card-image src={{data.img}} alt="img course">
+      </div>
+    </mat-card>
+  </div>
+</div>

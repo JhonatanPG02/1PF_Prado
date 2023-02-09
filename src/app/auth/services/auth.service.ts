@@ -1,6 +1,7 @@
 import { Injectable } from '@angular/core';
 import { AngularFireAuth } from '@angular/fire/compat/auth';
 import { Router } from '@angular/router';
+import { Store } from '@ngrx/store';
 import firebase from 'firebase/compat/app'
 import 'firebase/compat/auth'
 import { CookieService } from 'ngx-cookie-service';
@@ -16,7 +17,8 @@ export class AuthService {
 constructor(
   private router: Router,
   private auth: AngularFireAuth,
-  private cookiesService: CookieService
+  private cookiesService: CookieService,
+  private store: Store
 ) { }
 
 authLogin(email: string, password: string) {
@@ -34,7 +36,6 @@ authLogin(email: string, password: string) {
 authRegiter(email: string, password: string) {
   this.auth.createUserWithEmailAndPassword(email, password).then(
     (user) => {
-      console.log(user)
       this.router.navigate(['/auth/login'])
     }
   )

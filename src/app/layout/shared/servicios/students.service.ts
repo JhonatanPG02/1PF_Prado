@@ -25,14 +25,12 @@ constructor(
       this.store.dispatch(dataStudents(
         {students: res}
       ))
-      console.log(this.store)
     });
 
-    this.getCourses().subscribe(res => {
+  this.getCourses().subscribe(res => {
       this.store.dispatch(dataCourses(
         {courses: res}
       ))
-      console.log(this.store)
     })
 }
 
@@ -44,15 +42,4 @@ constructor(
     return this.http.get(this.url2).pipe( map( (response: any) => response.courses ))
   }
 
-  // addStudents(payload: any) {
-  //   this.store.dispatch(addStudent({alumno: payload}))
-  // }
-
-  // deleteStudent(data: Alumnos) {
-  //   this.store.dispatch(deleteStudent({alumno: data}))
-  // }
-
-  // editStudent(data: Alumnos) {
-  //   this.store.dispatch(editStudent({alumno: data}))
-  // }
 }

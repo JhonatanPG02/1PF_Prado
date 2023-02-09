@@ -1,4 +1,7 @@
 
+img {
+  width: 100%;
+}
 
 .banner {
   display: flex;
@@ -6,7 +9,7 @@
   position: relative;
 }
 
-button {
+.btn-access {
   position: absolute;
   bottom: 10px;
   left: calc(50% - 105px);
@@ -55,4 +58,24 @@ button {
   }
 }
 
+.button-login {
+  position: absolute;
+  top: 2rem;
+  left: 2rem;
+  width: 150px;
+}
+
+.button-logout {
+  position: absolute;
+  top: 2rem;
+  right: 2rem;
+  width: 150px;
+}
+
+.btn-w {
+  width: 150px;
+  height: 50px;
+  font-size: 16px;
+  border-radius: 30px;
+}
 

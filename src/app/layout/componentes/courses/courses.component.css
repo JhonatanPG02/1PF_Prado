@@ -1,0 +1,19 @@
+
+.container {
+  margin: 1rem;
+}
+
+.cards {
+  margin: 1rem;
+  border: 1px solid rgb(148, 32, 190);
+}
+
+img {
+  width: 150px;
+  height: 80px;
+}
+
+.container-card {
+  display: flex;
+  flex-direction: row;
+}

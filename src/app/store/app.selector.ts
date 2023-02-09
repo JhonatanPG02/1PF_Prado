@@ -14,3 +14,8 @@ export const selectListCourses = createSelector(
   selectStudentsFeature,
   (state: any) => state.courses
 )
+
+export const selectIsLogged = createSelector(
+  selectStudentsFeature,
+  (state: any) => state.isLogged
+)

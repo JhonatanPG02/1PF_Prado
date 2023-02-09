@@ -6,7 +6,8 @@ export const initialState: {
   students: any,
   courses: any,
 } = {students: [],
-    courses: []}
+    courses: []
+  }
 
 export const studentsReducer = createReducer(
   initialState,

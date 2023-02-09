@@ -13,17 +13,20 @@ import { StudentsService } from '../../shared/servicios/students.service';
 })
 export class CoursesComponent implements OnInit {
 
-  public courses: Observable<any>
+  public courses: Array<any> = [];
 
   constructor(
     private store: Store<AppState>,
     private studentsService: StudentsService
   ) {
-    this.studentsService.getStudents()
+    this.studentsService.getCourses()
   }
 
   ngOnInit() {
-    this.courses = this.store.select(selectListCourses)
+    this.store.select(selectListCourses).subscribe((response) => {
+      this.courses = response
+    })
+
   }
 
 }

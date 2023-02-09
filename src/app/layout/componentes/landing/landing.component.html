@@ -1,9 +1,19 @@
 <div>
   <div class="banner">
-    <img src="https://unividafup.edu.co/wp-content/uploads/2019/03/Banner-Educacion-virtual-2021.jpg"
-    alt="banner vidacredito"
-    class="image-banner"/>
-    <button mat-raised-button color="primary" (click)="nextPage()">Acceder</button>
+    <div>
+      <img src="https://unividafup.edu.co/wp-content/uploads/2019/03/Banner-Educacion-virtual-2021.jpg"
+      alt="banner"
+      class="image-banner"/>
+      <div class="button-container">
+        <div class="button-login">
+          <button mat-flat-button color="primary" class="btn-w" *ngIf="!logged" (click)="login()">Login</button>
+        </div>
+        <div class="button-logout">
+          <button mat-flat-button color="primary" class="btn-w" *ngIf="logged" (click)="logout()">Logout</button>
+        </div>
+      </div>
+    </div>
+    <button mat-raised-button color="primary" class="btn-access" (click)="nextPage()">Acceder</button>
   </div>
 
 

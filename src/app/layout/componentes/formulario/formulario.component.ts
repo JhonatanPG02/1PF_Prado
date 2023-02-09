@@ -42,8 +42,6 @@ export class FormularioComponent implements OnInit {
 
     this.students = this.store.select(selectListStudents)
 
-    console.log(this.students)
-
     this.formAlumnos = this.fb.group({
       documentNumber: [
         '',
@@ -152,7 +150,6 @@ export class FormularioComponent implements OnInit {
     this.formAlumnos.controls['course'].setValue(elem.course)
     this.formAlumnos.controls['turn'].setValue(elem.turn)
     this.formAlumnos.controls['email'].setValue(elem.email)
-    console.log(this.formAlumnos.value)
 
     this.viewContainerRef.createEmbeddedView(this.agregarAlumno)
   }
