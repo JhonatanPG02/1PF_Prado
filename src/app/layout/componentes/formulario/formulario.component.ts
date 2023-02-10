@@ -8,6 +8,8 @@ import { selectListStudents } from 'src/app/store/app.selector';
 import { AppState } from '../../../store/app.state';
 import { addStudent, deleteStudent, editStudent } from 'src/app/store/app.action';
 import { StudentsService } from '../../shared/servicios/students.service';
+import { loadStudents } from '../../../store/app.action';
+import { selectLoading } from '../../../store/app.selector';
 
 
 @Component({
@@ -33,15 +35,13 @@ export class FormularioComponent implements OnInit {
     private viewContainerRef: ViewContainerRef,
     private router: Router,
     private store: Store<AppState>,
-    private studenService: StudentsService
+
   ) {
-    this.studenService.getStudents()
   }
 
   ngOnInit(): void {
 
-    this.students = this.store.select(selectListStudents)
-
+    this.students = this.store.select(selectListStudents);
     this.formAlumnos = this.fb.group({
       documentNumber: [
         '',

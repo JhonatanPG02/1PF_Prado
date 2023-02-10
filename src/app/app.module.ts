@@ -16,6 +16,7 @@ import { StoreModule } from '@ngrx/store';
 import { EffectsModule } from '@ngrx/effects';
 import { StoreDevtoolsModule } from '@ngrx/store-devtools';
 import { ROOT_REDUCERS } from './store/app.state';
+import { AppEfeccts } from './store/app.effects';
 
 
 @NgModule({
@@ -34,7 +35,7 @@ import { ROOT_REDUCERS } from './store/app.state';
     AuthModule,
     AngularFireModule.initializeApp(environment.firebaseConfig),
     StoreModule.forRoot(ROOT_REDUCERS),
-    EffectsModule.forRoot([]),
+    EffectsModule.forRoot([AppEfeccts]),
     StoreDevtoolsModule.instrument({ maxAge: 25, logOnly: !isDevMode() }),
   ],
   exports: [

@@ -1,10 +1,9 @@
-import { AuthService } from './../../../auth/services/auth.service';
+
 import { Component, OnInit } from '@angular/core';
 import { Store } from '@ngrx/store';
-import { Observable } from 'rxjs';
 import { selectListCourses } from 'src/app/store/app.selector';
 import { AppState } from 'src/app/store/app.state';
-import { StudentsService } from '../../shared/servicios/students.service';
+
 
 @Component({
   selector: 'app-courses',
@@ -17,9 +16,8 @@ export class CoursesComponent implements OnInit {
 
   constructor(
     private store: Store<AppState>,
-    private studentsService: StudentsService
   ) {
-    this.studentsService.getCourses()
+
   }
 
   ngOnInit() {
